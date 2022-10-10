@@ -21,6 +21,15 @@ router
   .delete(tourControllers.deleteMultipleData);
 
 router
+  .route("/trending")
+  /**
+   * @api {get} /trending
+   * @apiDescription Delete multiple data from body query
+   * @apiPermission all
+   */
+  .get(tourControllers.getTourbyTrends);
+
+router
   .route("/")
   /**
    * @api {get} /

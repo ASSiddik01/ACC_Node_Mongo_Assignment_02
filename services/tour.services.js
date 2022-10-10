@@ -16,6 +16,12 @@ exports.getTourByIdService = async (id) => {
   return result;
 };
 
+// Get Tour by Trending API
+exports.getTourbyTrendsService = async (id) => {
+  const result = await TourSchema.find().sort({ view: -1 }).limit(3);
+  return result;
+};
+
 // Save Data Service
 exports.saveTourService = async (reqData) => {
   const data = new TourSchema(reqData);
