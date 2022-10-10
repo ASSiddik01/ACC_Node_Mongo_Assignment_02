@@ -3,24 +3,6 @@ const router = express.Router();
 const tourControllers = require("../controllers/tour.controller");
 
 router
-  .route("/bulk-update")
-  /**
-   * @api {patch} /bulk-update
-   * @apiDescription Update multiple data from body query
-   * @apiPermission all
-   */
-  .patch(tourControllers.updateMultipleData);
-
-router
-  .route("/bulk-delete")
-  /**
-   * @api {delete} /bulk-delete
-   * @apiDescription Delete multiple data from body query
-   * @apiPermission all
-   */
-  .delete(tourControllers.deleteMultipleData);
-
-router
   .route("/trending")
   /**
    * @api {get} /trending
@@ -66,12 +48,6 @@ router
    * @apiDescription Updata data by id parameter
    * @apiPermission all
    */
-  .patch(tourControllers.updateTour)
-  /**
-   * @api {delete} /:id
-   * @apiDescription Delete data by id parameter
-   * @apiPermission all
-   */
-  .delete(tourControllers.deleteData);
+  .patch(tourControllers.updateTour);
 
 module.exports = router;
