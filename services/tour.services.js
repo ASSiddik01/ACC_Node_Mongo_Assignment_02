@@ -1,8 +1,9 @@
 const TourSchema = require("../models/Tour.schema");
 
 // Get Data Service
-exports.getDataService = async () => {
-  const result = await TourSchema.find({});
+exports.getTourService = async (reqData) => {
+  const query = reqData;
+  const result = await TourSchema.find(query);
   return result;
 };
 

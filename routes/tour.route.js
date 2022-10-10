@@ -27,7 +27,7 @@ router
    * @apiDescription Get all data
    * @apiPermission all
    */
-  .get(tourControllers.getTourData)
+  .get(tourControllers.getTours)
   /**
    * @api {post} /bulk-delete
    * @apiDescription Sava data

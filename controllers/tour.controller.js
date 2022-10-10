@@ -1,5 +1,5 @@
 const {
-  getDataService,
+  getTourService,
   saveTourService,
   updateDataService,
   updateMultipleDataService,
@@ -8,11 +8,10 @@ const {
 } = require("../services/tour.services");
 
 // Get API
-exports.getTourData = async (req, res, next) => {
+exports.getTours = async (req, res, next) => {
   try {
-    const queryData = req.query;
-    // const result = await getDataService(queryData);
-    const result = "ok";
+    const reqData = req.query;
+    const result = await getTourService(reqData);
 
     res.status(200).json({
       success: true,
