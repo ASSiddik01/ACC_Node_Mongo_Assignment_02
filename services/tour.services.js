@@ -22,6 +22,12 @@ exports.getTourbyTrendsService = async (id) => {
   return result;
 };
 
+// Get Tour by Cheapets API
+exports.getTourbycheapestService = async (id) => {
+  const result = await TourSchema.find().sort({ price: 1 }).limit(3);
+  return result;
+};
+
 // Save Data Service
 exports.saveTourService = async (reqData) => {
   const data = new TourSchema(reqData);

@@ -7,6 +7,7 @@ const {
   deleteMultipleDataService,
   getTourByIdService,
   getTourbyTrendsService,
+  getTourbycheapestService,
 } = require("../services/tour.services");
 
 // Get API
@@ -52,6 +53,24 @@ exports.getTourById = async (req, res, next) => {
 exports.getTourbyTrends = async (req, res, next) => {
   try {
     const result = await getTourbyTrendsService();
+    res.status(200).json({
+      success: true,
+      message: `Data get successfully`,
+      data: result,
+    });
+  } catch (error) {
+    res.status(400).json({
+      success: false,
+      message: `Data get failed`,
+      error: error.message,
+    });
+  }
+};
+
+// Get Tour by Cheapets API
+exports.getTourbycheapest = async (req, res, next) => {
+  try {
+    const result = await getTourbycheapestService();
     res.status(200).json({
       success: true,
       message: `Data get successfully`,

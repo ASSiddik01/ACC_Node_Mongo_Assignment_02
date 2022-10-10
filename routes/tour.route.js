@@ -24,10 +24,19 @@ router
   .route("/trending")
   /**
    * @api {get} /trending
-   * @apiDescription Delete multiple data from body query
+   * @apiDescription Get data by mostviewed tour
    * @apiPermission all
    */
   .get(tourControllers.getTourbyTrends);
+
+router
+  .route("/cheapest")
+  /**
+   * @api {get} /cheapest
+   * @apiDescription Get data by cheapest price tour
+   * @apiPermission all
+   */
+  .get(tourControllers.getTourbycheapest);
 
 router
   .route("/")
