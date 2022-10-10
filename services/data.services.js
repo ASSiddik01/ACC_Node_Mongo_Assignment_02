@@ -1,21 +1,21 @@
-const Data = require("../models/Data");
+const TourSchema = require("../models/Tour.schema");
 
 // Get Data Service
 exports.getDataService = async () => {
-  const result = await Data.find({});
+  const result = await TourSchema.find({});
   return result;
 };
 
 // Save Data Service
 exports.saveDataService = async (reqData) => {
-  const data = new Data(reqData);
+  const data = new TourSchema(reqData);
   const result = await data.save();
   return result;
 };
 
 // Update Data Service
 exports.updateDataService = async (id, reqData) => {
-  const result = await Data.updateOne(
+  const result = await TourSchema.updateOne(
     { _id: id },
     { $set: reqData },
     { runValidators: true }
@@ -35,7 +35,7 @@ exports.updateMultipleDataService = async (reqData) => {
   const products = [];
 
   reqData.forEach((product) => {
-    products.push(Data.updateOne({ _id: product.id }, product.data));
+    products.push(TourSchema.updateOne({ _id: product.id }, product.data));
   });
 
   const result = await Promise.all(products);
@@ -45,12 +45,12 @@ exports.updateMultipleDataService = async (reqData) => {
 
 // Delete Data Service
 exports.deleteDataService = async (id) => {
-  const result = await Data.deleteOne({ _id: id });
+  const result = await TourSchema.deleteOne({ _id: id });
   return result;
 };
 
 //Delete Multiple Data Service
 exports.deleteMultipleDataService = async (reqData) => {
-  const result = await Data.deleteMany({ _id: reqData.ids });
+  const result = await TourSchema.deleteMany({ _id: reqData.ids });
   return result;
 };
