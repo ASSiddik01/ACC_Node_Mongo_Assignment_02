@@ -66,7 +66,7 @@ router
    * @apiDescription Updata data by id parameter
    * @apiPermission all
    */
-  .patch(tourControllers.updateData)
+  .patch(tourControllers.updateTour)
   /**
    * @api {delete} /:id
    * @apiDescription Delete data by id parameter

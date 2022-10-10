@@ -1,7 +1,7 @@
 const {
   getTourService,
   saveTourService,
-  updateDataService,
+  updateTourService,
   updateMultipleDataService,
   deleteDataService,
   deleteMultipleDataService,
@@ -107,12 +107,12 @@ exports.saveTour = async (req, res, next) => {
   }
 };
 
-// Update API
-exports.updateData = async (req, res, next) => {
+// Update tour API
+exports.updateTour = async (req, res, next) => {
   try {
     const { id } = req.params;
     const reqData = req.body;
-    const result = await updateDataService(id, reqData);
+    const result = await updateTourService(id, reqData);
     res.status(200).json({
       success: true,
       message: `Data update successfully`,

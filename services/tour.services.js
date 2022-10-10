@@ -7,7 +7,7 @@ exports.getTourService = async (reqData) => {
   return result;
 };
 
-// Get Tour by ID API
+// Get Tour by ID Service
 exports.getTourByIdService = async (id) => {
   const result = await TourSchema.findByIdAndUpdate(
     { _id: id },
@@ -16,13 +16,13 @@ exports.getTourByIdService = async (id) => {
   return result;
 };
 
-// Get Tour by Trending API
+// Get Tour by Trending Service
 exports.getTourbyTrendsService = async (id) => {
   const result = await TourSchema.find().sort({ view: -1 }).limit(3);
   return result;
 };
 
-// Get Tour by Cheapets API
+// Get Tour by Cheapets Service
 exports.getTourbycheapestService = async (id) => {
   const result = await TourSchema.find().sort({ price: 1 }).limit(3);
   return result;
@@ -35,8 +35,8 @@ exports.saveTourService = async (reqData) => {
   return result;
 };
 
-// Update Data Service
-exports.updateDataService = async (id, reqData) => {
+// Update tour Service
+exports.updateTourService = async (id, reqData) => {
   const result = await TourSchema.updateOne(
     { _id: id },
     { $set: reqData },
