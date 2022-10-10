@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const dataControllers = require("../controllers/data.controller");
+const tourControllers = require("../controllers/tour.controller");
 
 router
   .route("/bulk-update")
@@ -9,7 +9,7 @@ router
    * @apiDescription Update multiple data from body query
    * @apiPermission all
    */
-  .patch(dataControllers.updateMultipleData);
+  .patch(tourControllers.updateMultipleData);
 
 router
   .route("/bulk-delete")
@@ -18,7 +18,7 @@ router
    * @apiDescription Delete multiple data from body query
    * @apiPermission all
    */
-  .delete(dataControllers.deleteMultipleData);
+  .delete(tourControllers.deleteMultipleData);
 
 router
   .route("/")
@@ -27,13 +27,13 @@ router
    * @apiDescription Get all data
    * @apiPermission all
    */
-  .get(dataControllers.getData)
+  .get(tourControllers.getTourData)
   /**
    * @api {post} /bulk-delete
    * @apiDescription Sava data
    * @apiPermission all
    */
-  .post(dataControllers.saveData);
+  .post(tourControllers.saveTour);
 
 router
   .route("/:id")
@@ -42,12 +42,12 @@ router
    * @apiDescription Updata data by id parameter
    * @apiPermission all
    */
-  .patch(dataControllers.updateData)
+  .patch(tourControllers.updateData)
   /**
    * @api {delete} /:id
    * @apiDescription Delete data by id parameter
    * @apiPermission all
    */
-  .delete(dataControllers.deleteData);
+  .delete(tourControllers.deleteData);
 
 module.exports = router;

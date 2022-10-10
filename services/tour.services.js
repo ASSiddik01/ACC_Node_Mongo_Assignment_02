@@ -7,7 +7,7 @@ exports.getDataService = async () => {
 };
 
 // Save Data Service
-exports.saveDataService = async (reqData) => {
+exports.saveTourService = async (reqData) => {
   const data = new TourSchema(reqData);
   const result = await data.save();
   return result;

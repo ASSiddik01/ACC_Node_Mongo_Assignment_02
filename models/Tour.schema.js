@@ -14,12 +14,15 @@ const tourSchema = mongoose.Schema(
     description: {
       type: String,
       required: true,
+      minLength: [10, "Description can't be less than 10 characters"],
     },
-    imageUrl: {
+    image: {
       type: String,
       required: true,
-      validate:
+      validate: [
         /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)/,
+        "Please provide a valid image url",
+      ],
     },
     price: {
       type: Number,
@@ -31,37 +34,15 @@ const tourSchema = mongoose.Schema(
       required: true,
       min: [1, "Duration can't be less than 1"],
       max: [30, "Duration can't be more than 30"],
-      validate: {
-        validator: (value) => {
-          const isInteger = Number.isInteger(value);
-          if (isInteger) {
-            return true;
-          } else {
-            return false;
-          }
-        },
-      },
-      message: "Duration must be an integer",
     },
     view: {
       type: Number,
-      default: 0,
+      min: [0, "View can't be less than 0"],
     },
     maxPeople: {
       type: Number,
       required: true,
-      min: [1, "Max people size can't be less than 1"],
-      validate: {
-        validator: (value) => {
-          const isInteger = Number.isInteger(value);
-          if (isInteger) {
-            return true;
-          } else {
-            return false;
-          }
-        },
-      },
-      message: "Quantity must be an integer",
+      min: [1, "Max people can't be less than 1"],
     },
     categories: [
       {
@@ -77,7 +58,7 @@ const tourSchema = mongoose.Schema(
       required: true,
       enum: {
         values: ["available", "unavailable"],
-        message: "Status can't be {VALUE} ",
+        message: "Status can't be {VALUE}. Either available or unavailable",
       },
     },
   },
@@ -88,8 +69,14 @@ const tourSchema = mongoose.Schema(
 
 // Middleware
 tourSchema.pre("save", function (next) {
-  if (this.status == null) {
-    this.status = "available";
+  if (this.price == 0) {
+    this.status = "unavailable";
+  }
+  next();
+});
+tourSchema.pre("save", function (next) {
+  if (this.view == null) {
+    this.view = "0";
   }
   next();
 });
@@ -100,6 +87,6 @@ tourSchema.methods.logger = function () {
 };
 
 // Model Create
-const Data = mongoose.model("tours", tourSchema);
+const Data = mongoose.model("tour", tourSchema);
 
 module.exports = Data;

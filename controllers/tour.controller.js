@@ -1,14 +1,14 @@
 const {
   getDataService,
-  saveDataService,
+  saveTourService,
   updateDataService,
   updateMultipleDataService,
   deleteDataService,
   deleteMultipleDataService,
-} = require("../services/data.services");
+} = require("../services/tour.services");
 
 // Get API
-exports.getData = async (req, res, next) => {
+exports.getTourData = async (req, res, next) => {
   try {
     const queryData = req.query;
     // const result = await getDataService(queryData);
@@ -29,11 +29,11 @@ exports.getData = async (req, res, next) => {
 };
 
 // Save API
-exports.saveData = async (req, res, next) => {
+exports.saveTour = async (req, res, next) => {
   try {
     // Save
     const reqData = req.body;
-    const result = await saveDataService(reqData);
+    const result = await saveTourService(reqData);
     result.logger();
 
     res.status(200).json({
