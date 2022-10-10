@@ -5,6 +5,7 @@ const {
   updateMultipleDataService,
   deleteDataService,
   deleteMultipleDataService,
+  getTourByIdService,
 } = require("../services/tour.services");
 
 // Get API
@@ -22,6 +23,25 @@ exports.getTours = async (req, res, next) => {
     res.status(400).json({
       success: false,
       message: `Data can't get`,
+      error: error.message,
+    });
+  }
+};
+
+// Get Tour by ID API
+exports.getTourById = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const result = await getTourByIdService(id);
+    res.status(200).json({
+      success: true,
+      message: `Data update successfully`,
+      data: result,
+    });
+  } catch (error) {
+    res.status(400).json({
+      success: false,
+      message: `Data update failed`,
       error: error.message,
     });
   }

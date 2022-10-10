@@ -7,6 +7,15 @@ exports.getTourService = async (reqData) => {
   return result;
 };
 
+// Get Tour by ID API
+exports.getTourByIdService = async (id) => {
+  const result = await TourSchema.findByIdAndUpdate(
+    { _id: id },
+    { $inc: { view: 1 } }
+  );
+  return result;
+};
+
 // Save Data Service
 exports.saveTourService = async (reqData) => {
   const data = new TourSchema(reqData);

@@ -38,6 +38,12 @@ router
 router
   .route("/:id")
   /**
+   * @api {get} /:id
+   * @apiDescription Get data by id parameter
+   * @apiPermission all
+   */
+  .get(tourControllers.getTourById)
+  /**
    * @api {patch} /:id
    * @apiDescription Updata data by id parameter
    * @apiPermission all
