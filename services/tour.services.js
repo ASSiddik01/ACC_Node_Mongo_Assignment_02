@@ -2,9 +2,39 @@ const TourSchema = require("../models/Tour.schema");
 
 // Get Data Service
 exports.getTourService = async (reqData) => {
-  const query = reqData;
-  const result = await TourSchema.find(query);
-  return result;
+  // Query Handle
+  let filters = { ...reqData };
+  const excludeFields = ["sort", "page", "limit", "fields"];
+  excludeFields.forEach((filter) => delete filters[filter]);
+  const { limit = 3, page = 1, sort, fields } = reqData;
+  const queries = {};
+  if (sort) {
+    const result = sort.split(",").join(" ");
+    queries.sortBy = result;
+  }
+  if (fields) {
+    const result = fields.split(",").join(" ");
+    queries.fields = result;
+  }
+
+  // Operator handle
+  let filtersString = JSON.stringify(filters);
+  filtersString = filtersString.replace(
+    /\b(gt|gte|lt|lte)\b/g,
+    (match) => `$${match}`
+  );
+  filters = JSON.parse(filtersString);
+
+  // Pagination
+  const total = await TourSchema.countDocuments(filters);
+  const pageCount = Math.ceil(total / limit);
+
+  const result = await TourSchema.find(filters)
+    .skip(+(page - 1) * limit)
+    .limit(+limit)
+    .select(queries.fields)
+    .sort(queries.sortBy);
+  return { total, pageCount, result };
 };
 
 // Get Tour by ID Service
