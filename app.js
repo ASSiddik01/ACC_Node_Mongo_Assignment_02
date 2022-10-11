@@ -13,6 +13,7 @@ app.get("/", (req, res) => {
 });
 
 // Data Route
+app.use("/tour", tourRoute);
 app.use("/tours", tourRoute);
 
 // Unknown API Handle
